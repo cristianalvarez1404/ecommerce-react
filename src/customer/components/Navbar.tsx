@@ -1,28 +1,37 @@
 import React from 'react'
-import { Avatar, Box, Button, IconButton } from '@mui/material'
+import { Avatar, Box, Button, IconButton, useMediaQuery, useTheme } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { AddShoppingCart, FavoriteBorder, Storefront } from '@mui/icons-material';
 
 const Navbar = () => {
+  const theme = useTheme();
+  const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
     <>
       <Box>
-        <div className=''>
           <div className='flex items-center justify-between px-5 lg:px-20 h-[70px] border-b border-gray-300'>
-            <div className='flex items-center gap-2'>
-              <IconButton>
-                <MenuIcon></MenuIcon>
-              </IconButton>
+            <div className='flex items-center gap-2 lg:gap-6'>
+              { !isLarge && 
+                <IconButton>
+                  <MenuIcon/>
+                </IconButton>
+              }
               <h1 className='logo cursor-pointer text-lg md:text-2xl text-[#00927c]'>Ecommerce</h1>
             </div>
+            <ul className='h-[70px] flex items-center font-medium text-gray-800 justify-between gap-6'>
+              {["Men","Women","Home & Furniture", "Electronics"].map(item => (
+                <li className='mainCategory hover:text-[#00927c] cursor-pointer hover:border-b-2 px-4 border-[#00927c]'>{item}</li>
+              ))}
+            </ul>
             <div>
               <IconButton>
                 <SearchIcon/>
               </IconButton>
               {
-                true
+                false
                   ? <Button className='flex items-center gap-2'>
                     <Avatar
                       sx={{ width: 29, height:29 }}
@@ -38,12 +47,14 @@ const Navbar = () => {
               <IconButton>
                 <AddShoppingCart className='text-gray-700' sx={{fontSize:29}}/>
               </IconButton>
-              <Button startIcon={<Storefront/>} variant='outlined'>
-                Become Seller
-              </Button>
+              { isLarge
+                &&
+                <Button startIcon={<Storefront/>} variant='outlined'>
+                  Become Seller
+                </Button>
+              }
             </div>
           </div>
-        </div>
       </Box>
     </>
   )

@@ -1,13 +1,18 @@
-import { Button } from "@mui/material";
+import { Button, ThemeProvider } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "./App.css";
 import Navbar from "./customer/components/Navbar";
+import customeTheme from "./theme/customTheme";
+import Home from "./customer/pages/home/Home";
 
 function App() {
   return (
-    <div className="">
-      <Navbar/>
-    </div>
+    <ThemeProvider theme={customeTheme}>
+      <div>
+        <Navbar />
+        <Home/>
+      </div>
+    </ThemeProvider>
   );
 }
 
