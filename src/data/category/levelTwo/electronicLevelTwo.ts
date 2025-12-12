@@ -1,0 +1,26 @@
+export const electronicLevelTwo = [
+  {
+    "name":"Topwere",
+    "categoryId":"men_topwear",
+    "parentCategoryId":"men",
+    "level":2
+  },
+  {
+    "name":"Topwere",
+    "categoryId":"men_topwear",
+    "parentCategoryId":"men",
+    "level":2
+  },
+  {
+    "name":"Topwere",
+    "categoryId":"men_topwear",
+    "parentCategoryId":"men",
+    "level":2
+  },
+  {
+    "name":"Topwere",
+    "categoryId":"men_topwear",
+    "parentCategoryId":"men",
+    "level":2
+  },
+]
