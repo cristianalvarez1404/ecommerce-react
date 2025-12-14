@@ -1,0 +1,14 @@
+.card {
+  @apply relative w-[250px] h-[350px] overflow-hidden 
+}
+
+.card-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform .5s ease-in-out;
+  cursor: pointer;
+  object-fit: cover;
+}

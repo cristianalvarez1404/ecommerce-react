@@ -4,13 +4,15 @@ import "./App.css";
 import Navbar from "./customer/components/Navbar/Navbar";
 import customeTheme from "./theme/customTheme";
 import Home from "./customer/pages/home/Home";
+import Product from "./customer/pages/product/Product";
 
 function App() {
   return (
     <ThemeProvider theme={customeTheme}>
       <div>
         <Navbar />
-        <Home/>
+        {/* <Home/> */}
+        <Product/>
       </div>
     </ThemeProvider>
   );
