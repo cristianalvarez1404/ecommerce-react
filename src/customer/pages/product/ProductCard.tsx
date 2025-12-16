@@ -47,7 +47,7 @@ const ProductCard = () => {
             style={{transform:`translateX(${(index - currentImage) * 100}%)`}}
             alt="" />
           )}
-          { 
+          { isHovered &&
             <div className='indicator flex flex-col items-center space-x-2'>
               <div className='flex gap-3'>
                 <Button variant='contained' color='secondary'>
@@ -59,6 +59,23 @@ const ProductCard = () => {
               </div>
             </div>
           }
+        </div>
+        <div className='details pt-3 space-y-1 group-hover-effect rounded-md'>
+          <div className='name'>
+            <h1>Niky</h1>
+            <p>Blue Shirt</p>
+          </div>
+          <div className='price flex items-center gap-3'>
+            <span className='font-sans text-gray-800'>
+              $400
+            </span>
+            <span className='thin-line-through text-gray-400'>
+              $999
+            </span>
+            <span className='text-teal-500 font-semibold'>
+              60%
+            </span>
+          </div>
         </div>
       </div>
     </>

@@ -55,8 +55,8 @@ const Product = () => {
             </FormControl>
           </div>
           <Divider/>
-          <section className="products_section">
-            <ProductCard />
+          <section className="products_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
+            {[1,1,1,1,1,1].map((_) => <ProductCard /> )}
           </section>
         </div>
       </div>
