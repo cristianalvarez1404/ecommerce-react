@@ -4,6 +4,8 @@ import AddIcon from "@mui/icons-material/Add";
 import { teal } from "@mui/material/colors";
 import { Button, Divider } from "@mui/material";
 import { AddShoppingCart, FavoriteBorder, LocalShipping, Remove, Shield, Wallet, WorkspacePremium } from "@mui/icons-material";
+import SimilarProduct from "./SimilarProduct";
+import ReviewCard from "../review/ReviewCard";
 
 
 const ProductDetails = () => {
@@ -98,7 +100,22 @@ const ProductDetails = () => {
                 Whishlist
             </Button>
           </div>
+          <div className="mt-5">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet explicabo tenetur unde culpa. Dolorum suscipit ratione est reiciendis aspernatur blanditiis adipisci possimus magni veritatis tenetur consequatur tempora fugit, nisi quisquam.</p>
+          </div>
+          <div className="mt-7">
+            <ReviewCard/>
+          </div>
         </section>
+      </div>
+
+      <div className="mt-20">
+        <h1 className="text-lg font-bold">
+          Similar Product
+        </h1>
+        <div className="pt-5">
+          <SimilarProduct/>
+        </div>
       </div>
     </div>
   );
