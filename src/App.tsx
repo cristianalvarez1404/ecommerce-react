@@ -6,6 +6,8 @@ import customeTheme from "./theme/customTheme";
 import Home from "./customer/pages/home/Home";
 import Product from "./customer/pages/product/Product";
 import PageDetails from "./customer/pages/pageDetails/ProductDetails";
+import Review from "./customer/pages/review/Review";
+import Cart from "./customer/pages/cart/Cart";
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
         <Navbar />
         {/* <Home/> */}
         {/* <Product/> */}
-        <PageDetails/>
+        {/* <PageDetails/> */}
+        {/* <Review /> */}
+        <Cart />
       </div>
     </ThemeProvider>
   );
