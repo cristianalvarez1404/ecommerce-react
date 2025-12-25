@@ -8,6 +8,7 @@ import Product from "./customer/pages/product/Product";
 import PageDetails from "./customer/pages/pageDetails/ProductDetails";
 import Review from "./customer/pages/review/Review";
 import Cart from "./customer/pages/cart/Cart";
+import Checkout from "./customer/pages/checkout/Checkout";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         {/* <Product/> */}
         {/* <PageDetails/> */}
         {/* <Review /> */}
-        <Cart />
+        {/* <Cart /> */}
+        <Checkout />
       </div>
     </ThemeProvider>
   );

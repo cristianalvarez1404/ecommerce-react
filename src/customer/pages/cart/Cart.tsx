@@ -51,8 +51,13 @@ const Cart = () => {
               </div>
             )}
           </div>
-          <div>
+          <div className="border border-gray-400 rounded-md">
             <PricingCart />
+            <div className="p-5">
+              <Button fullWidth variant="contained" sx={{ py: "11px" }}>
+                Buy now
+              </Button>
+            </div>
           </div>
         </div>
       </div>
