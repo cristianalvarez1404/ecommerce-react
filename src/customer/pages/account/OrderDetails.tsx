@@ -1,7 +1,11 @@
 import { Box, Button } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import OrderStepper from "./OrderStepper";
 
 const OrderDetails = () => {
+  const navigate = useNavigate();
+
   return (
     <Box className="space-y-5">
       <section className="flex flex-col gap-5 justify-center items-center">
@@ -22,11 +26,13 @@ const OrderDetails = () => {
           </p>
         </div>
         <div>
-          <Button></Button>
+          <Button onClick={() => navigate(`/reviews/${5}/create`)}>
+            Write Review
+          </Button>
         </div>
       </section>
       <section className="border border-gray-400 p-5">
-        
+        <OrderStepper orderStatus={"SHIPPED"} />
       </section>
     </Box>
   );
