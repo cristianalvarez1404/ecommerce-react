@@ -10,6 +10,7 @@ import Review from "./customer/pages/review/Review";
 import Cart from "./customer/pages/cart/Cart";
 import Checkout from "./customer/pages/checkout/Checkout";
 import Account from "./customer/pages/account/Account";
+import UserDetails from "./customer/pages/account/UserDetails";
 
 function App() {
   return (
