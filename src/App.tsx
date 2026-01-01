@@ -11,19 +11,37 @@ import Cart from "./customer/pages/cart/Cart";
 import Checkout from "./customer/pages/checkout/Checkout";
 import Account from "./customer/pages/account/Account";
 import UserDetails from "./customer/pages/account/UserDetails";
+import { Route, Routes } from "react-router-dom";
+import OrderDetails from "./customer/pages/account/OrderDetails";
+import Orders from "./customer/pages/account/Orders";
+import Address from "./customer/pages/account/Address";
+import BecomeSeller from "./customer/pages/Become Seller/BecomeSeller";
 
 function App() {
   return (
     <ThemeProvider theme={customeTheme}>
       <div>
-        <Navbar />
         {/* <Home/> */}
         {/* <Product/> */}
         {/* <PageDetails/> */}
         {/* <Review /> */}
         {/* <Cart /> */}
         {/* <Checkout /> */}
-        <Account />
+        {/* <Account /> */}
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products/:category" element={<Product />} />
+          <Route path="/reviews/:productId" element={<Review />} />
+          <Route
+            path="/product-details/:categoryId/:name/:productId"
+            element={<PageDetails />}
+          />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/become-seller" element={<BecomeSeller />} />
+          <Route path="/account/*" element={<Account />} />
+        </Routes>
       </div>
     </ThemeProvider>
   );
