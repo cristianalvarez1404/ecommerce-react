@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import React from "react";
 
 const BecomeSellerFromStep1 = ({ formik }: any) => {
@@ -6,7 +6,26 @@ const BecomeSellerFromStep1 = ({ formik }: any) => {
     <div>
       <Box>
         <p className="text-xl font-bold text-center pb-9">Contact Details</p>
-        <div className="space-y-9"></div>
+        <div className="space-y-9">
+          <TextField
+            fullWidth
+            name="mobile"
+            label="Mobile"
+            value={formik.values.mobile}
+            onChange={formik.handleChange}
+            error={formik.touched.mobile && Boolean(formik.errors.mobile)}
+            helperText={formik.errors.mobile}
+          />
+          <TextField
+            fullWidth
+            name="GSTIN"
+            label="GSTIN"
+            value={formik.values.GSTIN}
+            onChange={formik.handleChange}
+            error={formik.touched.GSTIN && Boolean(formik.errors.GSTIN)}
+            helperText={formik.errors.GSTIN}
+          />
+        </div>
       </Box>
     </div>
   );
