@@ -16,6 +16,7 @@ import OrderDetails from "./customer/pages/account/OrderDetails";
 import Orders from "./customer/pages/account/Orders";
 import Address from "./customer/pages/account/Address";
 import BecomeSeller from "./customer/pages/Become Seller/BecomeSeller";
+import SellerDashboard from "./seller/pages/sellerDashboard/SellerDashboard";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/become-seller" element={<BecomeSeller />} />
           <Route path="/account/*" element={<Account />} />
+          <Route path="/seller/*" element={<SellerDashboard />} />
         </Routes>
       </div>
     </ThemeProvider>
