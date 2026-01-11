@@ -17,6 +17,8 @@ import Orders from "./customer/pages/account/Orders";
 import Address from "./customer/pages/account/Address";
 import BecomeSeller from "./customer/pages/Become Seller/BecomeSeller";
 import SellerDashboard from "./seller/pages/sellerDashboard/SellerDashboard";
+import Dashboard from "./admin/pages/dashboard/AdminDashboard";
+import AdminDashboard from "./admin/pages/dashboard/AdminDashboard";
 
 function App() {
   return (
@@ -43,6 +45,7 @@ function App() {
           <Route path="/become-seller" element={<BecomeSeller />} />
           <Route path="/account/*" element={<Account />} />
           <Route path="/seller/*" element={<SellerDashboard />} />
+          <Route path="/admin/*" element={<AdminDashboard />} />
         </Routes>
       </div>
     </ThemeProvider>

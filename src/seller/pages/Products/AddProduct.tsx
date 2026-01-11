@@ -164,7 +164,7 @@ const AddProduct = () => {
             />
 
           </Grid>
-          <Grid size={{xs:12}}>
+          <Grid size={{xs:12,md:4, lg:3}}>
             <TextField
               fullWidth
               id="mpr_Price"
@@ -183,7 +183,7 @@ const AddProduct = () => {
             />
 
           </Grid>
-          <Grid size={{xs:12}}>
+          <Grid size={{xs:12,md:4, lg:3}}>
             <TextField
               fullWidth
               id="sellingPrice"
@@ -202,7 +202,7 @@ const AddProduct = () => {
             />
 
           </Grid>
-          <Grid size={{xs:12}}>
+          <Grid size={{xs:12,md:4, lg:3}}>
               <FormControl fullWidth error={formik.touched.sizes && Boolean(formik.errors.sizes)} required>
                 <InputLabel id="color-label">Color</InputLabel>
                 <Select
@@ -232,7 +232,7 @@ const AddProduct = () => {
                 }
               </FormControl>
           </Grid>
-          <Grid size={{xs:12}}>
+          <Grid size={{xs:12,md:4, lg:3}}>
               <FormControl fullWidth error={formik.touched.sizes && Boolean(formik.errors.sizes)} required>
                 <InputLabel id="sizes-label">Sizes</InputLabel>
                 <Select
@@ -259,7 +259,7 @@ const AddProduct = () => {
                 }
               </FormControl>
           </Grid>
-          <Grid size={{xs:12}}>
+          <Grid size={{xs:12,md:4, lg:4}}>
             <FormControl
               fullWidth
               error={formik.touched.category && Boolean(formik.errors.category)}
@@ -288,7 +288,7 @@ const AddProduct = () => {
               }
             </FormControl>
           </Grid>
-          <Grid size={{xs:12}}>
+          <Grid size={{xs:12,md:4, lg:4}}>
             <FormControl
               fullWidth
               error={formik.touched.category && Boolean(formik.errors.category)}
@@ -318,7 +318,7 @@ const AddProduct = () => {
               }
             </FormControl>
           </Grid>
-          <Grid size={{xs:12}}>
+          <Grid size={{xs:12,md:4, lg:4}}>
             <FormControl
               fullWidth
               error={formik.touched.category && Boolean(formik.errors.category)}
