@@ -1,13 +1,49 @@
 import React from 'react'
 import DrawerList from '../../component/DrawerList'
-import { AccountBox, Logout } from '@mui/icons-material'
+import { AccountBox, Add, Category, Dashboard, ElectricBolt, Home, IntegrationInstructions, LocalOffer, Logout } from '@mui/icons-material'
 
 const menu = [
   {
-    name:"",
-    path:"",
-    icon:"",
-    activeIcon:""
+    name:"Dashboard",
+    path:"/admin",
+    icon:<Dashboard className='text-teal-600'/>,
+    activeIcon:<Dashboard className='text-white'/>
+  },
+  {
+    name:"Coupons",
+    path:"/admin/coupon",
+    icon:<IntegrationInstructions className='text-teal-600'/>,
+    activeIcon:<IntegrationInstructions className='text-white'/>
+  },
+  {
+    name:"Add New Coupon",
+    path:"/admin/add-coupon",
+    icon:<Add className='text-teal-600'/>,
+    activeIcon:<Add className='text-white'/>
+  },
+  {
+    name:"Home Page",
+    path:"/admin/home-grid",
+    icon:<Home className='text-teal-600'/>,
+    activeIcon:<Home className='text-white'/>
+  },
+  {
+    name:"Electronics Category",
+    path:"/admin/electronics-category",
+    icon:<ElectricBolt className='text-teal-600'/>,
+    activeIcon:<ElectricBolt className='text-white'/>
+  },
+  {
+    name:"Shop By Category",
+    path:"/admin/shop-by-category",
+    icon:<Category className='text-teal-600'/>,
+    activeIcon:<Category className='text-white'/>
+  },
+  {
+    name:"Deals",
+    path:"/admin/deals",
+    icon:<LocalOffer className='text-teal-600'/>,
+    activeIcon:<LocalOffer className='text-white'/>
   },
 ]
 
