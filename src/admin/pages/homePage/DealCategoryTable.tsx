@@ -1,7 +1,9 @@
 import React from 'react'
 import HomeCategoryTable from './HomeCategoryTable'
+import { useFormik } from 'formik'
 
-const GridTable = () => {
+const DealCategoryTable = () => {
+ 
   return (
     <div>
       <HomeCategoryTable/>
@@ -9,4 +11,4 @@ const GridTable = () => {
   )
 }
 
-export default GridTable
+export default DealCategoryTable

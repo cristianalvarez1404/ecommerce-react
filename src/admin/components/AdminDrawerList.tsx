@@ -29,7 +29,7 @@ const menu = [
   },
   {
     name:"Electronics Category",
-    path:"/admin/electronics-category",
+    path:"/admin/electronics",
     icon:<ElectricBolt className='text-teal-600'/>,
     activeIcon:<ElectricBolt className='text-white'/>
   },
