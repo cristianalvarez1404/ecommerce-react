@@ -10,27 +10,22 @@ import Review from "./customer/pages/review/Review";
 import Cart from "./customer/pages/cart/Cart";
 import Checkout from "./customer/pages/checkout/Checkout";
 import Account from "./customer/pages/account/Account";
-import UserDetails from "./customer/pages/account/UserDetails";
 import { Route, Routes } from "react-router-dom";
-import OrderDetails from "./customer/pages/account/OrderDetails";
-import Orders from "./customer/pages/account/Orders";
-import Address from "./customer/pages/account/Address";
 import BecomeSeller from "./customer/pages/Become Seller/BecomeSeller";
 import SellerDashboard from "./seller/pages/sellerDashboard/SellerDashboard";
-import Dashboard from "./admin/pages/dashboard/AdminDashboard";
 import AdminDashboard from "./admin/pages/dashboard/AdminDashboard";
+import { useEffect } from "react";
+import { fetchProduct } from "./state/fetchProduct";
 
 function App() {
+
+  useEffect(() => {
+    fetchProduct()
+  }, [])
+
   return (
     <ThemeProvider theme={customeTheme}>
       <div>
-        {/* <Home/> */}
-        {/* <Product/> */}
-        {/* <PageDetails/> */}
-        {/* <Review /> */}
-        {/* <Cart /> */}
-        {/* <Checkout /> */}
-        {/* <Account /> */}
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
