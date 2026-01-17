@@ -3,7 +3,7 @@ import {useDispatch, useSelector, type TypedUseSelectorHook} from "react-redux"
 import { thunk } from "redux-thunk"
 
 const rootReducer = combineReducers({
-
+  
 })
 
 export const store = configureStore({
