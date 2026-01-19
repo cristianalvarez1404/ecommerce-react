@@ -10,7 +10,7 @@ import Review from "./customer/pages/review/Review";
 import Cart from "./customer/pages/cart/Cart";
 import Checkout from "./customer/pages/checkout/Checkout";
 import Account from "./customer/pages/account/Account";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import BecomeSeller from "./customer/pages/Become Seller/BecomeSeller";
 import SellerDashboard from "./seller/pages/sellerDashboard/SellerDashboard";
 import AdminDashboard from "./admin/pages/dashboard/AdminDashboard";
@@ -21,10 +21,18 @@ import { fetchSellerProfile } from "./state/seller/sellerSlice";
 
 function App() {
   const dispatch = useAppDispatch();
+  const { seller } = useAppDispatch(store => store); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchSellerProfile(localStorage.getItem('jwt') || ""))
   }, [])
+
+  useEffect(() => {
+    if(seller.profile){
+      navigate("/seller")
+    }
+  }, [seller.profile])
 
   return (
     <ThemeProvider theme={customeTheme}>
