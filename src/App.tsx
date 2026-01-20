@@ -16,12 +16,12 @@ import SellerDashboard from "./seller/pages/sellerDashboard/SellerDashboard";
 import AdminDashboard from "./admin/pages/dashboard/AdminDashboard";
 import { useEffect } from "react";
 import { fetchProduct } from "./state/fetchProduct";
-import { useAppDispatch } from "./state/store";
+import { useAppDispatch, useAppSelector } from "./state/store";
 import { fetchSellerProfile } from "./state/seller/sellerSlice";
 
 function App() {
   const dispatch = useAppDispatch();
-  const { seller } = useAppDispatch(store => store); 
+  const { seller } = useAppSelector(store => store); 
   const navigate = useNavigate();
 
   useEffect(() => {
