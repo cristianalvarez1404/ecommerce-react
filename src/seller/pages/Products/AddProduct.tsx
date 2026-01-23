@@ -13,6 +13,8 @@ import { Button, CircularProgress, FormControl, FormHelperText, Grid, IconButton
 import { AddPhotoAlternate, Close } from "@mui/icons-material";
 import { mainCategory } from "../../../data/category/mainCategory";
 import { colors } from "../../../data/filter/color";
+import { useAppDispatch } from "../../../state/store";
+import { createProduct } from "../../../state/seller/sellerProductSlice";
 
 const categoryTwo: { [key: string]: any[] } = {
   men: menLevelTwo,
@@ -34,6 +36,7 @@ const categoryThree: { [key: string]: any[] } = {
 const AddProduct = () => {
   const [uploadImage, setUploadingImage] = useState(false);
   const [snackbarOpen, setOpenSnackbar] = useState(false);
+  const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -51,6 +54,7 @@ const AddProduct = () => {
     },
     onSubmit: (values) => {
       console.log(values);
+      dispatch(createProduct({request:values,jwt:localStorage.getItem("jwt")}))
     },
   });
 
