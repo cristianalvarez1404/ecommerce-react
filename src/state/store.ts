@@ -3,10 +3,12 @@ import {useDispatch, useSelector, type TypedUseSelectorHook} from "react-redux"
 import { thunk } from "redux-thunk"
 import sellerSlice from "./seller/sellerSlice"
 import sellerProductSlice from "./seller/sellerProductSlice"
+import productSlice from "./customer/productSlice"
 
 const rootReducer = combineReducers({
   seller: sellerSlice,
-  sellerProduct:sellerProductSlice
+  sellerProduct: sellerProductSlice,
+  product: productSlice
 })
 
 export const store = configureStore({

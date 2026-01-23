@@ -14,9 +14,11 @@ import {
 } from "@mui/icons-material";
 import SimilarProduct from "./SimilarProduct";
 import ReviewCard from "../review/ReviewCard";
+import { useAppDispatch } from "../../../state/store";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="px-5 lg:px-20 pt-10">

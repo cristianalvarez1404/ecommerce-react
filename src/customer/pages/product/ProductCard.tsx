@@ -3,6 +3,7 @@ import "./productCard.css"
 import { Button } from '@mui/material';
 import { Favorite, ModeComment } from '@mui/icons-material';
 import { teal } from '@mui/material/colors';
+import type { Product } from '../../../types/productTypes';
 
 const images = [
   "https://cdn.pixabay.com/photo/2015/04/15/09/28/head-723540_640.jpg",
@@ -12,7 +13,7 @@ const images = [
   "https://cdn.pixabay.com/photo/2015/04/15/09/28/head-723540_640.jpg",
 ]
 
-const ProductCard = () => {
+const ProductCard = ({item}:{item:Product}) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -21,7 +22,7 @@ const ProductCard = () => {
     
     if(isHovered){
       interval = setInterval(() => {
-        setCurrentImage((prevImage) => (prevImage + 1) % images.length );
+        setCurrentImage((prevImage) => (prevImage + 1) % item.images.length );
       }, 1000)
     }
     else if(interval) {
@@ -40,7 +41,7 @@ const ProductCard = () => {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {images.map((item, index) => 
+          {item.images.map((item, index) => 
             <img 
             className='card-media object-top' 
             src={item} 
@@ -62,18 +63,18 @@ const ProductCard = () => {
         </div>
         <div className='details pt-3 space-y-1 group-hover-effect rounded-md'>
           <div className='name'>
-            <h1>Niky</h1>
-            <p>Blue Shirt</p>
+            <h1>{item.seller?.businessDetails.businessName}</h1>
+            <p>{item.title}</p>
           </div>
           <div className='price flex items-center gap-3'>
             <span className='font-sans text-gray-800'>
-              $400
+              ${item.sellingPrice}
             </span>
             <span className='thin-line-through text-gray-400'>
-              $999
+              ${item.mrpPrice}
             </span>
             <span className='text-teal-500 font-semibold'>
-              60%
+              {item.discountPercent}%
             </span>
           </div>
         </div>

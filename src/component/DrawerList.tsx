@@ -1,6 +1,8 @@
 import { Divider, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../state/store";
+import { logout } from "../state/authSlice";
 
 interface menuItem {
   name: string;
@@ -19,6 +21,11 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
   
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  
+  const handleLogout = () => {
+    dispatch(logout(navigate))
+  }
 
   return (
     <div className="h-full">
@@ -40,7 +47,10 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
           <Divider/>
           <div className="space-y-2">
             {menu2.map((item, index) => (
-              <div onClick={() => navigate(item.path)} className="pr-9 cursor-pointer" key={index}>
+              <div onClick={() => {
+                navigate(item.path)
+                if(item.path == "/") handleLogout()
+              }} className="pr-9 cursor-pointer" key={index}>
                 <p className={`${item.path == location.pathname ? "bg-teal-600 text-white" : "text-teal-600"}
                 flex items-center px-5 py-3 rounded-r-full`}>
                   <ListItemIcon>
