@@ -1,6 +1,6 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit"
-import {useDispatch, useSelector, type TypedUseSelectorHook} from "react-redux"
-import { thunk } from "redux-thunk"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
+import { useDispatch, useSelector, type TypedUseSelectorHook } from "react-redux"
+
 import sellerSlice from "./seller/sellerSlice"
 import sellerProductSlice from "./seller/sellerProductSlice"
 import productSlice from "./customer/productSlice"
@@ -12,13 +12,11 @@ const rootReducer = combineReducers({
 })
 
 export const store = configureStore({
-  reducer: rootReducer,
-  middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(thunk)
+  reducer: rootReducer
 })
 
-export type AppiDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof rootReducer>
 
-export const useAppDispatch = () => useDispatch<AppiDispatch>();
-export const useAppSelector:TypedUseSelectorHook<RootState> = useSelector;
-
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

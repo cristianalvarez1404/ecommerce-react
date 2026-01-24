@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import AddIcon from "@mui/icons-material/Add";
 import { teal } from "@mui/material/colors";
@@ -14,21 +14,35 @@ import {
 } from "@mui/icons-material";
 import SimilarProduct from "./SimilarProduct";
 import ReviewCard from "../review/ReviewCard";
-import { useAppDispatch } from "../../../state/store";
+import { useAppDispatch, useAppSelector } from "../../../state/store";
+import { useParams } from "react-router-dom";
+import { fetchProductById } from "../../../state/customer/productSlice";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useAppDispatch();
+  const {productId} = useParams()
+  const {product} = useAppSelector(store => store)
+  const [activeImage, setActiveImage] = useState(0)
+
+  useEffect(() => {
+    dispatch(fetchProductById(Number(productId)))
+  },[productId])
+
+  const handleActiveImage = (value:number) => () => {
+    setActiveImage(value)
+  }
 
   return (
     <div className="px-5 lg:px-20 pt-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <section className="flex flex-col lg:flex-row gap-5">
           <div className="w-full lg:w-[15%] flex flex-wrap lg:flex-col gap-3">
-            {[1, 1, 1, 1, 1].map(() => (
+            {product.product?.images.map((item,index) => (
               <img
+                onClick={handleActiveImage(index)}
                 className="lg:w-full w-[50px] cursor-pointer rounded-md"
-                src="https://cdn.pixabay.com/photo/2015/04/15/09/28/head-723540_640.jpg"
+                src={item}
                 alt=""
               />
             ))}
@@ -36,14 +50,18 @@ const ProductDetails = () => {
           <div className="w-full lg:w-[85%]">
             <img
               className="w-full rounded-md"
-              src="https://cdn.pixabay.com/photo/2015/04/15/09/28/head-723540_640.jpg"
+              src={product.product?.images[activeImage]}
               alt=""
             />
           </div>
         </section>
         <section>
-          <h1 className="font-bold text-lg text-teal-500">Clothing</h1>
-          <p className="text-gray-500 font-semibold">men black shirt</p>
+          <h1 className="font-bold text-lg text-teal-500">
+            {product.product?.seller?.businessDetails.businessName}
+          </h1>
+          <p className="text-gray-500 font-semibold">
+            {product.product?.title}
+          </p>
           <div className="flex justify-between items-center py-2 border border-gray-200 w-[180px] px-3 mt-5">
             <div className="flex gap-1 items-center">
               <span>4</span>
@@ -54,9 +72,9 @@ const ProductDetails = () => {
           </div>
           <div>
             <div className="price flex items-center gap-3 mt-5 text-2xl">
-              <span className="font-sans text-gray-800">$400</span>
-              <span className="line-through text-gray-400">$999</span>
-              <span className="text-teal-500 font-semibold">60%</span>
+              <span className="font-sans text-gray-800">${product.product?.sellingPrice}</span>
+              <span className="line-through text-gray-400">${product.product?.mrpPrice}</span>
+              <span className="text-teal-500 font-semibold">{product.product?.discountPercent}%</span>
             </div>
             <p className="text-sm">
               Inclusive of all taxes. Free shipping above $500.
@@ -115,10 +133,7 @@ const ProductDetails = () => {
           </div>
           <div className="mt-5">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-              explicabo tenetur unde culpa. Dolorum suscipit ratione est
-              reiciendis aspernatur blanditiis adipisci possimus magni veritatis
-              tenetur consequatur tempora fugit, nisi quisquam.
+              {product.product?.description}
             </p>
           </div>
           <div className="mt-7">

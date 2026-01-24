@@ -44,8 +44,9 @@ const Navbar = () => {
             </h1>
           </div>
           <ul className="h-[70px] flex items-center font-medium text-gray-800 justify-between gap-6">
-            {mainCategory.map((item) => (
-              <li
+            {mainCategory.map((item,index) => (
+              <li 
+                key={item.categoryId}
                 onMouseLeave={() => setShowCategorySheet(false)}
                 onMouseEnter={() => {
                   setShowCategorySheet(true);
@@ -61,7 +62,7 @@ const Navbar = () => {
             <IconButton>
               <SearchIcon />
             </IconButton>
-            {true ? (
+            {false ? (
               <Button
                 onClick={() => navigation("/account")}
                 className="flex items-center gap-2"
@@ -73,7 +74,7 @@ const Navbar = () => {
                 <h1 className="font-semibold hidden lg:block">User</h1>
               </Button>
             ) : (
-              <Button variant="contained">Login</Button>
+              <Button onClick={() => navigation("/login")} variant="contained">Login</Button>
             )}
             <IconButton>
               <FavoriteBorder sx={{ fontSize: 29 }} />

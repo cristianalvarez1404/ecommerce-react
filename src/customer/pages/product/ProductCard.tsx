@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import { Favorite, ModeComment } from '@mui/icons-material';
 import { teal } from '@mui/material/colors';
 import type { Product } from '../../../types/productTypes';
+import { useNavigate } from 'react-router-dom';
 
 const images = [
   "https://cdn.pixabay.com/photo/2015/04/15/09/28/head-723540_640.jpg",
@@ -16,7 +17,8 @@ const images = [
 const ProductCard = ({item}:{item:Product}) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-
+  const navigate = useNavigate()
+  
   useEffect(() => {
     let interval:any;
     
@@ -36,7 +38,7 @@ const ProductCard = ({item}:{item:Product}) => {
   
   return (
     <>
-      <div className='group px-4 relative'>
+      <div onClick={() => navigate(`/product-details/${item.category?.categoryId}/${item.title}/${item.id}`)} className='group px-4 relative'>
         <div className='card'
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
