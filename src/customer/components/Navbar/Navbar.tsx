@@ -18,6 +18,7 @@ import {
 import CategorySheet from "./CategorySheet";
 import { mainCategory } from "../../../data/category/mainCategory";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../state/store";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -25,6 +26,7 @@ const Navbar = () => {
   const [selectedCategory, setSelectedCategory] = useState("men");
   const [showCategorySheet, setShowCategorySheet] = useState(false);
   const navigation = useNavigate();
+  const { auth } = useAppSelector(store => store);
 
   return (
     <>
@@ -62,7 +64,7 @@ const Navbar = () => {
             <IconButton>
               <SearchIcon />
             </IconButton>
-            {false ? (
+            {auth.user ? (
               <Button
                 onClick={() => navigation("/account")}
                 className="flex items-center gap-2"
@@ -71,7 +73,10 @@ const Navbar = () => {
                   sx={{ width: 29, height: 29 }}
                   src="https://cdn.pixabay.com/photo/2015/04/15/09/28/head-723540_640.jpg"
                 />
-                <h1 className="font-semibold hidden lg:block">User</h1>
+                <h1 className="font-semibold hidden lg:block">
+                  {auth.user?.fullName}
+                  {auth.user?.email}
+                </h1>
               </Button>
             ) : (
               <Button onClick={() => navigation("/login")} variant="contained">Login</Button>

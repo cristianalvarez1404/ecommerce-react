@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../config/Api";
+import type { User } from "../types/userTypes";
 
 export const sendLoginSignupOtp = createAsyncThunk("/auth/sendLoginSignupOtp", 
   async ({email}:{email:string}, {rejectWithValue}) => {
@@ -42,13 +43,13 @@ export const signup = createAsyncThunk<any, any>("/auth/signup",
 export const fetchUserProfile = createAsyncThunk<any, any>("/auth/fetchUserProfile", 
   async ({jwt}, {rejectWithValue}) => {
     try {
-      const response = await api.post("/api/users/profile",{
+      const response = await api.get("/api/users/profile",{
         headers:{
           Authorization: `Bearer ${jwt}`
         }
       })
       console.log("user profile",response.data)
-      return response.data.jwt
+      return response.data
     }catch(error){
       console.log("error - - -",error)
     }
@@ -58,7 +59,7 @@ export const fetchUserProfile = createAsyncThunk<any, any>("/auth/fetchUserProfi
 export const logout = createAsyncThunk<any, any>("/auth/logout", 
   async(navigate, {rejectWithValue}) => {
     try{
-      localStorage.clear(); 
+      localStorage.clear();
       navigate("/")
     } catch(error){
       console.log("error - - -", error);
@@ -70,7 +71,7 @@ interface AuthState {
   jwt: string | null | any,
   otpSend: boolean,
   isLoggedIn: boolean,
-  user: any | null
+  user: User | null
   loading: boolean
 }
 
@@ -108,6 +109,11 @@ const authSlice = createSlice({
     builder.addCase(fetchUserProfile.fulfilled, (state, action) => {
       state.user = action.payload
       state.isLoggedIn = true
+    })
+    builder.addCase(logout.fulfilled, (state) => {
+      state.jwt = null;
+      state.isLoggedIn = false;
+      state.user = null;
     })
   }
 })
