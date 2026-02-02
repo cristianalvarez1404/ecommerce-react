@@ -2,10 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { Cart, CartItem } from "../../types/cartTypes";
 import { api } from "../../config/Api";
 import { sumCartItemMrpPrice, sumCartItemSellingPrice } from "../../util/sumCartItemMrpPrice";
+import { applyCoupon } from "./couponSlice";
+import type { RootState } from "../store";
 
 export const fetchUserCart = createAsyncThunk<Cart, string>(
   "cart/fetchUserCart",
-  async (jwt: string, {rejectWithValue}) => {
+  async (jwt: string , {rejectWithValue}) => {
     try{
       const response = await api.get("/api/cart", {
         headers:{
@@ -148,5 +150,19 @@ const cartSlice = createSlice({
 
       state.loading = false;
     })
+    .addCase(updateCartItem.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload as string;
+    })
+    .addCase(applyCoupon.fulfilled, (state, action) => {
+      state.loading = false;
+      state.cart = action.payload;
+    })
   },
 })
+
+export default cartSlice.reducer;
+export const {resetCartState} = cartSlice.actions;
+// export const selectCart = (state: RootState) => state.cart.cart;
+// export const selectCartLoading = (state: RootState) => state.cart.loading;
+// export const selectCartError = (state: RootState) => state.cart.error;
