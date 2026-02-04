@@ -19,6 +19,7 @@ import { useAppDispatch, useAppSelector } from "./state/store";
 import { fetchSellerProfile } from "./state/seller/sellerSlice";
 import Auth from "./customer/pages/auth/Auth";
 import { fetchUserProfile } from "./state/authSlice";
+import PaymentSuccess from "./customer/pages/payment/PaymentSuccess";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -54,6 +55,7 @@ function App() {
           />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/payment-success/:orderId" element={<PaymentSuccess />} />
           <Route path="/become-seller" element={<BecomeSeller />} />
           <Route path="/account/*" element={<Account />} />
           <Route path="/seller/*" element={<SellerDashboard />} />

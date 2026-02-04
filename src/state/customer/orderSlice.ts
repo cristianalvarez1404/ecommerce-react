@@ -144,5 +144,66 @@ const orderSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
+
+      // Create a new order
+      .addCase(createOrder.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createOrder.fulfilled, (state, action) => {
+        state.paymentOrder = action.payload;
+        state.loading = false;
+      })
+      .addCase(createOrder.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      // Fetch order item by ID
+      .addCase(fetchOrderItemById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchOrderItemById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orderItem = action.payload;
+      })
+      .addCase(fetchOrderItemById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      // payment success handler
+      .addCase(paymentSuccess.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(paymentSuccess.fulfilled, (state, action) => {
+        state.loading = false;
+        console.log('Payment successfull: ', action.payload);
+      })
+      .addCase(paymentSuccess.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(cancelOrder.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.orderCanceled = false;
+      })
+      .addCase(cancelOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders = state.orders.map((order) => 
+          order.id === action.payload.id ? action.payload : order
+        );
+        state.orderCanceled = true;
+        state.currentOrder = action.payload;
+      })
+      .addCase(cancelOrder.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
   }
 })
+
+export default orderSlice.reducer

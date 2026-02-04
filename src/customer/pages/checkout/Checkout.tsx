@@ -120,7 +120,7 @@ const Checkout = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <AddressForm />
+            <AddressForm paymentGateway = {paymentGatway} />
           </Box>
         </Modal>
       </div>
