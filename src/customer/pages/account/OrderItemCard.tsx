@@ -2,8 +2,9 @@ import { ElectricBolt } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import { teal } from "@mui/material/colors";
 import React from "react";
+import type { OrderItem } from "../../../types/orderTypes";
 
-const OrderItem = () => {
+const OrderItemCard = ({item}:{item:OrderItem}) => {
   return (
     <div className="text-sm bg-white p-5 space-y-4 border border-gray-400 rounded-md cursor-pointer">
       <div className="flex items-center gap-5">
@@ -21,16 +22,13 @@ const OrderItem = () => {
         <div>
           <img
             className="w-[70px]"
-            src="https://png.pngtree.com/thumb_back/fh260/background/20230217/pngtree-blue-wavy-banner-background-blank-image_1608934.jpg"
+            src={item.product.images[0]}
             alt=""
           />
         </div>
         <div className="w-full space-y-2">
-          <h1 className="font-bold">Virani Clothing</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. A aperiam
-            dolorem ea, inventore delectus sit?
-          </p>
+          <h1 className="font-bold">{item.product.seller?.businessDetails.businessName}</h1>
+          <p>{item.product.title}</p>
           <p>
             <strong>size : </strong>
             FREE
@@ -41,4 +39,4 @@ const OrderItem = () => {
   );
 };
 
-export default OrderItem;
+export default OrderItemCard;
