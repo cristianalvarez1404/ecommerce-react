@@ -18,8 +18,8 @@ const Orders = () => {
         <p>from anytime</p>
       </div>
       <div className="space-y-2">
-        {order.orders.map((item) => (
-          <OrderItemCard item={item}/>
+        {order.orders.map((order) => order.orderItems.map((item) => 
+          <OrderItemCard item={item} order={order}/>
         ))}
       </div>
     </div>

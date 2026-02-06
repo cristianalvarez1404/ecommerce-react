@@ -81,7 +81,7 @@ const Navbar = () => {
             ) : (
               <Button onClick={() => navigation("/login")} variant="contained">Login</Button>
             )}
-            <IconButton>
+            <IconButton onClick={() => navigation("/wishlist")}>
               <FavoriteBorder sx={{ fontSize: 29 }} />
             </IconButton>
             <IconButton onClick={() => navigation("/cart")}>
