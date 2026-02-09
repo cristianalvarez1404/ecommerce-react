@@ -8,9 +8,9 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useAppDispatch, useAppSelector } from "../../../state/store";
 import { useEffect, useState } from "react";
-import { fetchSellerOrders } from "../../../state/seller/sellerOrderSlice";
+import { fetchSellerOrders, updateOrderStatus } from "../../../state/seller/sellerOrderSlice";
 import { useSelector } from "react-redux";
-import type { Order, OrderItem } from "../../../types/orderTypes";
+import { OrderStatus, type Order, type OrderItem } from "../../../types/orderTypes";
 import { Button, Menu, MenuItem } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -33,22 +33,40 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
+// function createData(
+//   name: string,
+//   calories: number,
+//   fat: number,
+//   carbs: number,
+//   protein: number,
+// ) {
+//   return { name, calories, fat, carbs, protein };
+// }
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
+// const rows = [
+//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+//   createData("Eclair", 262, 16.0, 24, 6.0),
+//   createData("Cupcake", 305, 3.7, 67, 4.3),
+//   createData("Gingerbread", 356, 16.0, 49, 3.9),
+// ];
+
+const orderStatusColor = {
+  PENDING: { color: "#FFA500", label: "PENDING" },
+  CONFIRMED: { color: "#F5BCBA", label: "CONFIRMED" },
+  PLACED: { color: "#F5BCBA", label: "PLACED" },
+  SHIPPED: { color: "#1E90FF", label: "SHIPPED" },
+  DELIVERED: { color: "#32CD32", label: "DELIVERED" },
+  CANCELLED: { color: "#FF0000", label: "CANCELLED" },
+};
+
+const orderStatus:{color:string, label: OrderStatus}[] = [
+  { color: "#FFA500", label: OrderStatus.PENDING },
+  { color: "#F5BCBA", label: OrderStatus.CONFIRMED },
+  { color: "#F5BCBA", label: OrderStatus.PLACED },
+  { color: "#1E90FF", label: OrderStatus.SHIPPED },
+  { color: "#32CD32", label: OrderStatus.DELIVERED },
+  { color: "#FF0000", label: OrderStatus.CANCELLED },
 ];
 
 export default function OrderTable() {
@@ -57,12 +75,18 @@ export default function OrderTable() {
 
   const [anchorEl, setAnchorEl] = useState({});
   const open = Boolean(anchorEl);
-  const handleClick = (event: any,orderId:number) => {
-    setAnchorEl((prev:any) => ({...prev, [orderId]: event.currentTarget}));
+
+  const handleClick = (event: any, orderId: number) => {
+    setAnchorEl((prev: any) => ({ ...prev, [orderId]: event.currentTarget }));
   };
-  const handleClose = () => {
-    setAnchorEl(null);
+
+  const handleClose = (orderId: number) => {
+    setAnchorEl((prev: any) => ({ ...prev, [orderId]: null }));
   };
+
+  const handleUpdateOrderStatus = (orderId:number, orderStatus:OrderStatus) => {
+    dispatch(updateOrderStatus({jwt:localStorage.getItem("jwt") || "", orderId, orderStatus}))
+  }
 
   useEffect(() => {
     dispatch(fetchSellerOrders(localStorage.getItem("jwt") || ""));
@@ -125,28 +149,28 @@ export default function OrderTable() {
               </StyledTableCell>
               <StyledTableCell align="right">
                 <Button
-                  id="basic-button"
-                  aria-controls={open ? "basic-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                  onClick={handleClick}
+                  size="small"
+                  color="primary"
+                  onClick={(e) => handleClick(e, item.id)}
                 >
-                  Dashboard
+                  status
                 </Button>
                 <Menu
-                  id="basic-menu"
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
+                  id={`status-menu ${item.id}`}
+                  anchorEl={anchorEl[item.id]}
+                  open={Boolean(anchorEl[item.id])}
+                  onClose={() => handleClose(item.id)}
                   slotProps={{
                     list: {
-                      "aria-labelledby": "basic-button",
+                      "aria-labelledby": `status-menu ${item.id}`,
                     },
                   }}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  {orderStatus.map((status) => (
+                    <MenuItem key={status.label} onClick={() => handleUpdateOrderStatus(item.id, status.label)}>
+                      {status.label}
+                    </MenuItem>
+                  ))}
                 </Menu>
               </StyledTableCell>
             </StyledTableRow>

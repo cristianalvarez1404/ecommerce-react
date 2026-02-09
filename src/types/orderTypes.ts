@@ -32,7 +32,9 @@ export enum OrderStatus {
   PENDING = 'PENDING',
   SHIPPED = 'SHIPPED',
   DELIVERED = 'DELIVERED',
-  CANCELLED = 'CANCELLED'
+  CANCELLED = 'CANCELLED',
+  CONFIRMED = "CONFIRMED",
+  PLACED  = "PLACED" 
 }
 
 export interface OrderItem {
