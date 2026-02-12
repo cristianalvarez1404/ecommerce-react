@@ -1,14 +1,6 @@
-import { createAsyncThunk } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { api } from "../../config/Api";
 import type { DealState } from "../../types/dealTypes";
-
-const initialState:DealState = {
-  deals: [],
-  loading: false,
-  error: null,
-  dealCreated: false,
-  dealUpdated: false
-}
 
 export const createDeal = createAsyncThunk(
   "deals/createDeal",
@@ -27,3 +19,66 @@ export const createDeal = createAsyncThunk(
     }
   }
 )
+
+export const deleteDeal = createAsyncThunk(
+  "deals/deleteDeal",
+  async (id: number, { rejectWithValue}) => {
+    try {
+      const response = await api.delete(`/admin/deals/${id}`, {
+        headers : {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+      });
+      return response.data;
+    } catch(error: any) {
+      return error.response.data.message;
+    }
+  }
+)
+
+const initialState:DealState = {
+  deals: [],
+  loading: false,
+  error: null,
+  dealCreated: false,
+  dealUpdated: false
+}
+
+const dealSlice = createSlice({
+  name:"deal",
+  initialState,
+  reducers:{},
+  extraReducers: (builder) => {
+    builder.addCase(createDeal.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+      state.dealCreated = false;
+    })
+    .addCase(createDeal.fulfilled, (state, action) => {
+      state.loading = false;
+      state.deals.push(action.payload);
+      state.dealCreated = true;
+    })
+    .addCase(createDeal.rejected, (state, action) => {
+      state.loading = false;
+      state.error = null;
+    })
+    
+    .addCase(deleteDeal.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(deleteDeal.fulfilled, (state, action) => {
+      state.loading = false;
+      
+    })
+    .addCase(deleteDeal.rejected, (state, action) => {
+      
+    })
+
+
+  }
+})
+
+export default dealSlice.reducer
