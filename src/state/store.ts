@@ -10,6 +10,8 @@ import orderSlice from "./customer/orderSlice"
 import wishlistSlice from "./customer/wishlistSlice"
 import sellerOrderSlice from "./seller/sellerOrderSlice"
 import transactions from "./seller/transactionSlice"
+import adminSlice from "./admin/adminSlice"
+import customerSlice from "./customer/customerSlice"
 
 const rootReducer = combineReducers({
   seller: sellerSlice,
@@ -19,8 +21,11 @@ const rootReducer = combineReducers({
   cart: cartSlice,
   order: orderSlice,
   wishlist: wishlistSlice,
+  customer: customerSlice,
+
   sellerOrder: sellerOrderSlice,
-  transactions: transactions
+  transactions: transactions,
+  admin: adminSlice
 })
 
 export const store = configureStore({
