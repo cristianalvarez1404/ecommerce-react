@@ -3,8 +3,10 @@ import DealCard from './DealCard'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { useAppSelector } from '../../../../state/store';
 
 const Deal = () => {
+  const { customer } = useAppSelector(store => store);
 
   const settings = {
     dots: true,
@@ -20,7 +22,7 @@ const Deal = () => {
   return (
     <div className='py-5 lg:px-20 slider-container'>
       <Slider {...settings} className='flex items-center justify-center'>
-        {[1,1,1,1,1,1,1,1,1,1].map(_ => <DealCard/>) }
+        {customer.homePageData?.deals.slice(0,6).map(item => <DealCard item={item}/>) }
       </Slider>
     </div>
   )

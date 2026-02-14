@@ -15,10 +15,28 @@ export const createDeal = createAsyncThunk(
 
       return response.data;
     }catch(error:any){
-      return error.response.data;
+      return error.response.message;
     }
   }
 )
+
+export const getAllDeals = createAsyncThunk(
+  "deals/getAllDeals",
+  async (_, { rejectWithValue }) => {
+    try{
+      const response = await api.get("/admin/deals", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        }
+      })
+      return response.data;
+    }catch(error:any) {
+      return error.response.data.message;
+    }
+  }
+)
+
 
 export const deleteDeal = createAsyncThunk(
   "deals/deleteDeal",
